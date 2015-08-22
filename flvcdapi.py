@@ -2,7 +2,7 @@
 #coding: utf-8
 # 这个文件用来完成将视频的地址提交到flvcd.com上，再对返回的结果做格式化处理
 __author__ = 'natas'
-import re, urllib, subprocess
+import re, urllib, subprocess, sys
 from urllib import request
 from time import sleep
 
@@ -42,15 +42,32 @@ def save2file(url, filename, directory=r'.', playnow = True):
         print('Call player')
         openPlayer(full_path)
     urllib.request.urlretrieve(url, full_path)
+    print('Downloaded.'  '🍺')
 
 
 def openPlayer(filename):
     playerbin=r'/Applications/VLC.app/Contents/MacOS/VLC'
-    sleep(1)
     subprocess.Popen([playerbin, filename])
+
+
+def helper():
+    print('Help:\n'
+          '    This is a tool that can get bilibili.com video\'s download link address.\n'
+          '    Just paste the video playing page url here. press [Enter]\n'
+          '    Like this: {0} [Enter]\n'
+          '    Exit with Ctrl+C qwq\n'.format(VIDEOURL))
 
 
 if __name__ == '__main__':
     VIDEOURL = r'http://www.bilibili.com/video/av2769452/'
-    video_info = getflvcdresult(VIDEOURL)
-    save2file(video_info[0], video_info[1])
+    helper()
+    try:
+        while True:
+            print('Input here: ', end='')
+            user_input=input()
+            VIDEOURL=user_input
+            video_info = getflvcdresult(VIDEOURL)
+            save2file(video_info[0], video_info[1])
+    except:
+        print('\nI am out?')
+        pass
