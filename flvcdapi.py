@@ -65,6 +65,8 @@ if __name__ == '__main__':
         while True:
             print('Input here: ', end='')
             user_input=input()
+            if user_input == '':
+                continue
             VIDEOURL=user_input
             video_info = getflvcdresult(VIDEOURL)
             save2file(video_info[0], video_info[1])
