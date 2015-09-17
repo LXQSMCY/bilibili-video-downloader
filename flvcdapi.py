@@ -25,9 +25,11 @@ def getflvcdresult(VIDEOURL):
     print('INFO_Extract...')
     index = resultcontent.find(key2find[0])
     print('Locate:%d' % (index))
+    # URL
     key[0] = (((re.compile('".*?"')).findall(resultcontent[index+len(key2find[0])::]))[0])[1:-1:]
     index = resultcontent.find(key2find[1])
     print('Locate:%d' % (index))
+    # Title
     key[1] = (((re.compile('".*?"')).findall(resultcontent[index+len(key2find[1])::]))[0])[1:-1:].split(sep='/')[0]  # 可怕的文件名含有起卦自负
     print('URL:{0}\nTitle:{1}'.format(key[0], key[1]))
     # 这里返回了一个播放用的URL和标题
@@ -67,6 +69,10 @@ if __name__ == '__main__':
             user_input=input()
             VIDEOURL=user_input
             video_info = getflvcdresult(VIDEOURL)
+            # 如果返回'-'则表示出现了错误？从现象上来看是这样的，有待详细研究！
+            if video_info[1] == '-':
+                print('Here we got a error. Forget it.')
+                continue
             save2file(video_info[0], video_info[1])
     except:
         print('\nI am out?')
