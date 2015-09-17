@@ -67,6 +67,8 @@ if __name__ == '__main__':
         while True:
             print('Input here: ', end='')
             user_input=input()
+            if user_input == '':
+                continue
             VIDEOURL=user_input
             video_info = getflvcdresult(VIDEOURL)
             # 如果返回'-'则表示出现了错误？从现象上来看是这样的，有待详细研究！
