@@ -10,6 +10,7 @@ OS X 下的一个bilibili视频下载器（还不是很完善），目前是用�
 #使用方法
 1.
 shell下运行工具(flvcdapi.py)，将bilibili的视频播放地址粘贴到shell中，回车，开始下载，同时打开VLC进行播放，就酱。
+
 2.
 (osx-clip.py)这是一个剪切板工具，识别剪切板中的http地址，并打印到shell中，可以用管道的方式和(multiThread.py 多线程下载)工具结合起来使用
 eg:././osx-clip.py | ./multiThread.py
