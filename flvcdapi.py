@@ -24,11 +24,11 @@ def getflvcdresult(VIDEOURL):
     key = ['', '']
     print('INFO_Extract...')
     index = resultcontent.find(key2find[0])
-    print('Locate:%d' % (index))
+    #print('Locate:%d' % (index))
     # URL
     key[0] = (((re.compile('".*?"')).findall(resultcontent[index+len(key2find[0])::]))[0])[1:-1:]
     index = resultcontent.find(key2find[1])
-    print('Locate:%d' % (index))
+    #print('Locate:%d' % (index))
     # Title
     key[1] = (((re.compile('".*?"')).findall(resultcontent[index+len(key2find[1])::]))[0])[1:-1:].split(sep='/')[0]  # 可怕的文件名含有起卦自负
     print('URL:{0}\nTitle:{1}'.format(key[0], key[1]))
@@ -44,7 +44,8 @@ def save2file(url, filename, directory=r'.', playnow = True):
         print('Call player')
         openPlayer(full_path)
     urllib.request.urlretrieve(url, full_path)
-    print('Downloaded.'  '🍺')
+    print('%Downloaded.'  '🍺')
+    return filename
 
 
 def openPlayer(filename):

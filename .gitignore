@@ -1,2 +1,5 @@
 .idea
 *.flv
+__pycache__/
+*.mp4
+*.txt
