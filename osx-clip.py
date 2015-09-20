@@ -4,8 +4,7 @@
 __author__ = 'natas'
 
 from AppKit import  *
-import re, time
-
+import re, time, os
 # 剪切版类
 class clipboard:
     def __init__(self):
@@ -36,7 +35,7 @@ def main():
     while TRUE:
         clip = pb()
         if (clip != last_clip) & cont_chk(clip):
-            print clip
+            os.system('echo %s' % clip)
         time.sleep(0.2)
         last_clip = clip
 
