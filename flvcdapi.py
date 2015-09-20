@@ -44,7 +44,7 @@ def save2file(url, filename, directory=r'.', playnow = True):
         print('Call player')
         openPlayer(full_path)
     urllib.request.urlretrieve(url, full_path)
-    print('%Downloaded.'  '🍺')
+    print('Downloaded.'  '🍺')
     return filename
 
 
