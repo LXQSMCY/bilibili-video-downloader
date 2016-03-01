@@ -3,11 +3,12 @@
 # 这个文件用来完成将视频的地址提交到flvcd.com上，再对返回的结果做格式化处理
 __author__ = 'natas'
 import re, urllib, subprocess, sys
+import os
 from urllib import request
 from time import sleep
 
 FLVCDURL=[r'http://www.flvcd.com/parse.php?format=&kw=', r"&format=super"]
-
+FNULL=open(os.devnull, 'w')
 
 def getflvcdresult(VIDEOURL):
     # 构造请求
@@ -50,7 +51,7 @@ def save2file(url, filename, directory=r'.', playnow = True):
 
 def openPlayer(filename):
     playerbin=r'/Applications/VLC.app/Contents/MacOS/VLC'
-    subprocess.Popen([playerbin, filename])
+    subprocess.Popen([playerbin, filename], stdout=FNULL, stderr=FNULL)
 
 
 def helper():
@@ -77,6 +78,8 @@ if __name__ == '__main__':
                 print('Here we got a error. Forget it.')
                 continue
             save2file(video_info[0], video_info[1])
-    except:
-        print('\nI am out?')
+    except (KeyboardInterrupt, SystemExit):
+        exit
+    except Exception as e:
+        print(e)
         pass
