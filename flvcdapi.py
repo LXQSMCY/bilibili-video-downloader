@@ -77,6 +77,8 @@ if __name__ == '__main__':
                 print('Here we got a error. Forget it.')
                 continue
             save2file(video_info[0], video_info[1])
-    except:
-        print('\nI am out?')
+    except (KeyboardInterrupt, SystemExit):
+        exit
+    except Exception as e:
+        print(e)
         pass
