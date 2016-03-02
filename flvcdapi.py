@@ -35,12 +35,14 @@ def getflvcdresult(VIDEOURL):
     soup = BeautifulSoup(resultcontent, "lxml")
     m3uForm = soup.find(lambda x: (u'name', u'm3uForm') in dict(x.attrs).items())
     filename = m3uForm.find(attrs={'name':'filename'}).get("value")
+    filename = filename.strip() + '.flv'
     infurl = m3uForm.find(attrs={'name':'inf'}).get("value")[:-1]
+    # 返回文件名以及URL
     return infurl, filename
 
 def save2file(url, filename, directory=r'.', playnow = True):
     # TODO: 重写下载方法提高下载速度
-    full_path=directory + '/' + filename
+    full_path = os.path.join(directory, filename)
     print('Save file to: {0}'.format(full_path))
     open(full_path, 'w').close()
     if playnow :
