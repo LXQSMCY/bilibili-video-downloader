@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # coding: utf-8
 # 这个文件用来完成将视频的地址提交到flvcd.com上，再对返回的结果做格式化处理
 # 兼容python2，3
@@ -15,6 +14,7 @@ __author__ = 'natas'
 import re
 import subprocess
 import sys
+from bs4 import BeautifulSoup
 import os
 from time import sleep
 
@@ -32,19 +32,11 @@ def getflvcdresult(VIDEOURL):
     resultcontent = urllib.request.urlopen(req).read()
     resultcontent = resultcontent.decode('gbk')
     # 提取网页中返回的信息
-    key2find = [u'下载地址：<a href=', u'var cliptitle = ']
-    key = ['', '']
-    print('INFO_Extract...')
-    index = resultcontent.find(key2find[0])
-    # URL
-    key[0] = (((re.compile('".*?"')).findall(resultcontent[index+len(key2find[0])::]))[0])[1:-1:]
-    index = resultcontent.find(key2find[1])
-    # Title
-    key[1] = (((re.compile('".*?"')).findall(resultcontent[index+len(key2find[1])::]))[0])[1:-1:].split(sep='/')[0]
-    print('URL:{0}\nTitle:{1}'.format(key[0], key[1]))
-    # 这里返回了一个播放用的URL和标题
-    return key[0], key[1]
-
+    soup = BeautifulSoup(resultcontent, "lxml")
+    m3uForm = soup.find(lambda x: (u'name', u'm3uForm') in dict(x.attrs).items())
+    filename = m3uForm.find(attrs={'name':'filename'}).get("value")
+    infurl = m3uForm.find(attrs={'name':'inf'}).get("value")[:-1]
+    return infurl, filename
 
 def save2file(url, filename, directory=r'.', playnow = True):
     # TODO: 重写下载方法提高下载速度
