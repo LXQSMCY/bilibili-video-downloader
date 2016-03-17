@@ -1,3 +1,4 @@
+#!/usr/bin/env python2.7
 # coding: utf-8
 # 这个文件用来完成将视频的地址提交到flvcd.com上，再对返回的结果做格式化处理
 from __future__ import print_function, unicode_literals
