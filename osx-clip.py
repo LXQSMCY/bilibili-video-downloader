@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# coding=utf-8
+# coding: utf-8
 # !!!key: This is a python 2.7 version, and you need a Appkit py module.
 
 
@@ -10,7 +10,6 @@ import os
 import AppKit
 
 __author__ = 'natas'
-
 
 # 剪切版类
 class Clipboard:
@@ -44,7 +43,7 @@ def main():
     while True:
         clip = pb()
         if (clip != last_clip) & cont_chk(clip):
-            os.system('echo %s' % clip)
+            print(clip)
         time.sleep(0.2)
         last_clip = clip
 
