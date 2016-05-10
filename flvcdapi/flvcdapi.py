@@ -19,6 +19,7 @@ __author__ = 'natas'
 
 FLVCDURL = [r'http://www.flvcd.com/parse.php?format=&kw=', r"&format=super"]
 FNULL = open(os.devnull, 'w')
+VIDEOURL = r'http://www.bilibili.com/video/av2769452/'
 
 
 def getflvcdresult(videourl):
@@ -67,8 +68,7 @@ def helper():
           '    Exit with Ctrl+C qwq\n'.format(VIDEOURL))
 
 
-if __name__ == '__main__':
-    VIDEOURL = r'http://www.bilibili.com/video/av2769452/'
+def main():
     helper()
     while True:
         try:
@@ -90,3 +90,7 @@ if __name__ == '__main__':
         except Exception as e:
             raise
         print("End loop.")
+
+
+if __name__ == '__main__':
+    main()
